@@ -1,0 +1,63 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Layout, Menu, Icon } from 'antd';
+import { Link, withRouter } from 'react-router-dom';
+import menu from '@/config/menu'; // 菜单配置
+const { Sider } = Layout;
+const { SubMenu } = Menu;
+
+class CustomSider extends Component {
+    state = {};
+    componentDidMount() {
+        const menuList = this.renderMenu(menu);
+        this.setState({
+            menuList
+        });
+    }
+    //使用递归
+    renderMenu = data => {
+        return data.map(item => {
+            if (item.children) {
+                return (
+                    <SubMenu
+                        key={item.key}
+                        title={
+                            <span>
+                                <Icon type={item.icon} />
+                                <span className="nav-text">{item.title}</span>
+                            </span>
+                        }>
+                        {this.renderMenu(item.children)}
+                    </SubMenu>
+                );
+            } else {
+                return (
+                    <Menu.Item key={item.key}>
+                        <Link to={item.key}>
+                            {item.icon ? <Icon type={item.icon} /> : ''}
+                            <span className="nav-text">{item.title}</span>
+                        </Link>
+                    </Menu.Item>
+                );
+            }
+        });
+    };
+
+    render() {
+        const { collapsed } = this.props;
+        return (
+            <Sider trigger={null} collapsible collapsed={collapsed}>
+                <div className="logo" />
+                <Menu theme="dark" mode="inline" selectedKeys={[this.props.history.location.pathname]}>
+                    {this.state.menuList}
+                </Menu>
+            </Sider>
+        );
+    }
+}
+
+const mapState = state => ({
+    collapsed: state.sider.collapsed
+});
+
+export default connect(mapState, null)(withRouter(CustomSider));

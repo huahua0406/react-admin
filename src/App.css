@@ -1,0 +1,22 @@
+.App {
+    height: 100%;
+}
+
+.App .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+    color: rgba(0,0,0,0.65);;
+}
+
+.App .trigger:hover {
+    color: #1890ff;
+}
+
+.App .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+}
