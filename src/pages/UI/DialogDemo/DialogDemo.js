@@ -62,11 +62,11 @@ class DialogDemo extends Component {
             <div>
                 <Card title="基础模态框" style={cardStyles}>
                     <Button type="primary" onClick={this.showModal}>
-                        Open Modal
+                        基本用法
                     </Button>
                     &emsp;
                     <Button type="primary" onClick={this.showAsyncModal}>
-                        Open Modal with async logic
+                        异步关闭
                     </Button>
                     <Modal
                         title="基础用法"

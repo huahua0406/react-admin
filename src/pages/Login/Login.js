@@ -18,6 +18,7 @@ class Login extends Component {
                 console.log(result);
                 if (result.data.data.code == 0) {
                     message.info('登录成功');
+                    this.props.history.replace('/');
                 } else {
                     message.info('登录失败');
                 }

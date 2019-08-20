@@ -1,5 +1,5 @@
 /**
- * user模块接口列表
+ * example模块接口列表
  */
 import request from '@/utils/request';
 

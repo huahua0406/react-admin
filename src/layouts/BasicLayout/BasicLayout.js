@@ -29,6 +29,7 @@ class BasicLayout extends Component {
                     <Content style={styles.content}>
                         {/* Content */}
                         <Routes />
+                        {/* Content */}
                     </Content>
                     <Footer style={styles.footer}>
                         {global.Config.copyright}

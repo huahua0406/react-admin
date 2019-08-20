@@ -22,6 +22,14 @@ export default [
                 key: '/ui/dialog'
             },
             {
+                title: '通知提醒框',
+                key: '/ui/notification'
+            },
+            {
+                title: '标签页',
+                key: '/ui/tabs'
+            },
+            {
                 title: '轮播图',
                 key: '/ui/carousel'
             }

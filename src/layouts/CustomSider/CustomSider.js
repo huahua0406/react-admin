@@ -7,14 +7,34 @@ const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 class CustomSider extends Component {
-    state = {};
+    state = {
+        menuList: [],
+        selectedKey: '',
+        openKey: ''
+    };
     componentDidMount() {
         const menuList = this.renderMenu(menu);
         this.setState({
             menuList
         });
+        const { pathname } = this.props.history.location;
+        this.setState({
+            selectedKey: pathname,
+            openKey: pathname.substr(0, pathname.lastIndexOf('/'))
+        });
     }
-    //使用递归
+    menuClick = e => {
+        this.setState({
+            selectedKey: e.key
+        });
+    };
+    openMenu = v => {
+        console.log(v);
+        this.setState({
+            openKey: v[v.length - 1]
+        });
+    };
+    //使用递归生成菜单
     renderMenu = data => {
         return data.map(item => {
             if (item.children) {
@@ -45,11 +65,18 @@ class CustomSider extends Component {
 
     render() {
         const { collapsed } = this.props;
+        const { menuList, selectedKey, openKey } = this.state;
         return (
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="logo" />
-                <Menu theme="dark" mode="inline" selectedKeys={[this.props.history.location.pathname]}>
-                    {this.state.menuList}
+                <Menu
+                    theme="dark"
+                    mode="inline"
+                    selectedKeys={[selectedKey]}
+                    openKeys={[openKey]}
+                    onClick={this.menuClick}
+                    onOpenChange={this.openMenu}>
+                    {menuList}
                 </Menu>
             </Sider>
         );
@@ -60,4 +87,7 @@ const mapState = state => ({
     collapsed: state.sider.collapsed
 });
 
-export default connect(mapState, null)(withRouter(CustomSider));
+export default connect(
+    mapState,
+    null
+)(withRouter(CustomSider));
