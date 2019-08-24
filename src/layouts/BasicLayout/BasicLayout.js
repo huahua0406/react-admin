@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Layout, BackTop } from 'antd';
 import CustomSider from '@/layouts/CustomSider/CustomSider';
 import CustomBreadcrumb from '@/layouts/CustomBreadcrumb/CustomBreadcrumb';
@@ -13,17 +14,22 @@ const styles = {
         padding: 24,
         background: '#fff'
     },
-    footer:{
-        textAlign:'center'
+    footer: {
+        textAlign: 'center'
     }
 };
 
 class BasicLayout extends Component {
     render() {
+        const { collapsed } = this.props;
         return (
             <Layout className="basicLayout">
                 <CustomSider />
-                <Layout style={{ minHeight: '100vh' }}>
+                <Layout
+                    style={{
+                        minHeight: '100vh',
+                        paddingLeft: collapsed ? '80px' : '200px'
+                    }}>
                     <CustomHeader />
                     <CustomBreadcrumb />
                     <Content style={styles.content}>
@@ -41,4 +47,11 @@ class BasicLayout extends Component {
     }
 }
 
-export default BasicLayout;
+const mapState = state => ({
+    collapsed: state.sider.collapsed
+});
+
+export default connect(
+    mapState,
+    null
+)(BasicLayout);

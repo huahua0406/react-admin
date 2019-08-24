@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Card, Icon, Row, Col } from 'antd';
 import CountUp from 'react-countup';
-
+import Bar from './Bar';
+import Line from './Line';
 import './index.less';
 
 class Home extends Component {
     render() {
         return (
             <div className="home-wrapper">
-                <Row gutter={16}>
+                <Row gutter={16} style={{marginBottom:35}}>
                     <Col span={8}>
                         <Card className="card-item">
                             <div className="card-wrap">
@@ -49,9 +50,14 @@ class Home extends Component {
                         </Card>
                     </Col>
                 </Row>
-                <div>
-                    11222
-                </div>
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Bar />
+                    </Col>
+                    <Col span={12}>
+                        <Line />
+                    </Col>
+                </Row>
             </div>
         );
     }

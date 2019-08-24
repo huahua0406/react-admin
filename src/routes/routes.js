@@ -1,13 +1,14 @@
 import loadable from '@/utils/loadable';
 
 // 参数一定要是函数，否则不会懒加载，只会代码拆分
-const Home = loadable(()=>import(/* webpackChunkName: 'home' */'@/pages/Home'));
+const Home = loadable(()=>import(/* webpackChunkName: 'home' */'@/pages/Home/Home'));
 
 // ui
 const ButtonDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/ButtonDemo/ButtonDemo'));
 const IconDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/IconDemo/IconDemo'));
 const DialogDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/DialogDemo/DialogDemo'));
 const NotificationDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/NotificationDemo/NotificationDemo'));
+const TabsDemo = loadable(()=>import(/* webpackChunkName: 'tabs' */'@/pages/UI/TabsDemo/TabsDemo'));
 const CarouselDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/CarouselDemo/CarouselDemo'));
 
 // form
@@ -19,8 +20,6 @@ const BaseTable = loadable(()=>import(/* webpackChunkName: 'table' */'@/pages/Ta
 
 // about
 const About = loadable(()=>import(/* webpackChunkName: 'about' */'@/pages/About/About'));
-// notice
-const Notice = loadable(()=>import(/* webpackChunkName: 'notice' */'@/pages/Notice/Notice'));
 
 // const NotFound = loadable(()=>import(/* webpackChunkName: 'notfound' */'@/pages/Error/NotFound'));
 
@@ -46,6 +45,10 @@ const routes = [
         component: NotificationDemo
     },
     {
+        path:'/ui/tabs',
+        component: TabsDemo
+    },
+    {
         path: '/ui/carousel',
         component: CarouselDemo
     },
@@ -60,10 +63,6 @@ const routes = [
     {
         path:'/table/basetable',
         component: BaseTable
-    },
-    {
-        path:'/notice',
-        component: Notice
     },
     {
         path:'/about',

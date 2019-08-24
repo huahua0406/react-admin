@@ -23,13 +23,21 @@ class CustomSider extends Component {
             openKey: pathname.substr(0, pathname.lastIndexOf('/'))
         });
     }
+    componentWillReceiveProps(nextProps){
+        // console.log(nextProps);
+        const { pathname } = this.props.history.location;
+        this.setState({
+            selectedKey: pathname,
+            openKey: pathname.substr(0, pathname.lastIndexOf('/'))
+        });
+    }
+
     menuClick = e => {
         this.setState({
             selectedKey: e.key
         });
     };
     openMenu = v => {
-        console.log(v);
         this.setState({
             openKey: v[v.length - 1]
         });
@@ -67,7 +75,12 @@ class CustomSider extends Component {
         const { collapsed } = this.props;
         const { menuList, selectedKey, openKey } = this.state;
         return (
-            <Sider trigger={null} collapsible collapsed={collapsed}>
+            <Sider
+                trigger={null}
+                collapsible
+                collapsed={collapsed}
+                width={200}
+                className="sider fixed-sider">
                 <div className="logo" />
                 <Menu
                     theme="dark"

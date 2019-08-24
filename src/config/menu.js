@@ -37,7 +37,7 @@ export default [
     },
     {
         title: '表单',
-        icon: 'appstore-o',
+        icon: 'form',
         key: '/form',
         children: [
             {
@@ -52,7 +52,7 @@ export default [
     },
     {
         title: '表格',
-        icon: 'appstore-o',
+        icon: 'table',
         key: '/table',
         children: [
             {
@@ -62,8 +62,19 @@ export default [
         ]
     },
     {
+        title: '图表',
+        icon: 'line-chart',
+        key: '/charts',
+        children: [
+            {
+                title: '基础表格',
+                key: '/table/basetable'
+            }
+        ]
+    },
+    {
         title: '关于',
-        icon: 'appstore-o',
+        icon: 'info-circle',
         key: '/about',
     },
 ];

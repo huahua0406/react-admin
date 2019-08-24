@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import routesArr from './routes';
-console.log(routesArr);
+// console.log(routesArr);
 
 const renderRoutes = routes => {
     // TODO:未登录 跳转到login Redirect
