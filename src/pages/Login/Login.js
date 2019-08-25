@@ -39,7 +39,7 @@ class Login extends Component {
                             rules: [
                                 {
                                     required: true,
-                                    message: 'Please input your username!'
+                                    message: '请输入用户名!'
                                 }
                             ]
                         })(
@@ -50,7 +50,7 @@ class Login extends Component {
                                         style={{ color: 'rgba(0,0,0,.25)' }}
                                     />
                                 }
-                                placeholder="Username"
+                                placeholder="用户名"
                             />
                         )}
                     </Form.Item>
@@ -59,7 +59,7 @@ class Login extends Component {
                             rules: [
                                 {
                                     required: true,
-                                    message: 'Please input your Password!'
+                                    message: '请输入密码!'
                                 }
                             ]
                         })(
@@ -71,7 +71,7 @@ class Login extends Component {
                                     />
                                 }
                                 type="password"
-                                placeholder="Password"
+                                placeholder="密码"
                             />
                         )}
                     </Form.Item>
@@ -80,11 +80,11 @@ class Login extends Component {
                             type="primary"
                             htmlType="submit"
                             className="login-form-button">
-                            Log in
+                            登录
                         </Button>
                     </Form.Item>
                 </Form>
-                <footer className="login-footer">footer</footer>
+                <footer className="login-footer">{Config.copyright}</footer>
             </div>
         );
     }

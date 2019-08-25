@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Layout, Icon, Badge, Menu, Dropdown, message } from 'antd';
+import { Layout, Icon, Badge, Menu, Dropdown, Avatar, message } from 'antd';
 const { Header } = Layout;
 import { siderCollapsed } from '@/redux/actions/sider';
 import { judgeIsSupportFull, fullScreen, fullExit } from '@/utils/screenfull';
@@ -115,7 +115,10 @@ class CustomHeader extends Component {
                                 </Menu>
                             )}>
                             <a className="ant-dropdown-link">
-                                你好，{this.state.sysName}&emsp;
+                                {/* <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /> */}
+                                <span>
+                                    {this.state.sysName}&emsp;
+                                </span>
                                 <Icon type="down" />
                             </a>
                         </Dropdown>

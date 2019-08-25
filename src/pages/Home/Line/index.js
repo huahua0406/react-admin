@@ -18,49 +18,43 @@ import {
 // 数据源
 const data = [
     {
-        year: '1991',
+        week: '星期一',
         value: 3
     },
     {
-        year: '1992',
+        week: '星期二',
         value: 4
     },
     {
-        year: '1993',
+        week: '星期三',
         value: 3.5
     },
     {
-        year: '1994',
+        week: '星期四',
         value: 5
     },
     {
-        year: '1995',
+        week: '星期五',
         value: 4.9
     },
     {
-        year: '1996',
+        week: '星期六',
         value: 6
     },
     {
-        year: '1997',
+        week: '星期日',
         value: 7
-    },
-    {
-        year: '1998',
-        value: 9
-    },
-    {
-        year: '1999',
-        value: 13
     }
 ];
 // 定义度量
 const cols = {
     value: {
-        min: 0
+        min: 0,
+        alias: '新增访问'
     },
-    year: {
-        range: [0, 1]
+    week: {
+        range: [0, 1],
+        alias: '星期'
     }
 };
 
@@ -68,17 +62,17 @@ class Line extends Component {
     render() {
         return (
             <Chart height={400} data={data} scale={cols} forceFit>
-                <Axis name="year" />
-                <Axis name="value" />
+                <Axis name="week" />
+                <Axis title name="value" />
                 <Tooltip
                     crosshairs={{
                         type: 'y'
                     }}
                 />
-                <Geom type="line" position="year*value" size={2} />
+                <Geom type="line" position="week*value" size={2} />
                 <Geom
                     type="point"
-                    position="year*value"
+                    position="week*value"
                     size={4}
                     shape={'circle'}
                     style={{

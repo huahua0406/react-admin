@@ -30,6 +30,10 @@ export default [
                 key: '/ui/tabs'
             },
             {
+                title: '图片画廊',
+                key: '/ui/gallery'
+            },
+            {
                 title: '轮播图',
                 key: '/ui/carousel'
             }
@@ -67,8 +71,23 @@ export default [
         key: '/charts',
         children: [
             {
-                title: '基础表格',
-                key: '/table/basetable'
+                title: 'BizCharts',
+                key: '/charts/bizcharts'
+            },
+            {
+                title: 'ECharts',
+                key: '/charts/echarts'
+            }
+        ]
+    },
+    {
+        title: '富文本',
+        icon: 'edit',
+        key: '/editor',
+        children: [
+            {
+                title: '富文本编辑器',
+                key: '/editor/wysiwyg'
             }
         ]
     },

@@ -17,56 +17,48 @@ import {
 
 const data = [
     {
-        year: '2019 年 10 ',
-        sales: 38
+        week: '星期一',
+        times: 38
     },
     {
-        year: '1952 年 11',
-        sales: 52
+        week: '星期二',
+        times: 52
     },
     {
-        year: '1956 年',
-        sales: 61
+        week: '星期三',
+        times: 61
     },
     {
-        year: '1957 年',
-        sales: 145
+        week: '星期四',
+        times: 145
     },
     {
-        year: '1958 年',
-        sales: 48
+        week: '星期五',
+        times: 48
     },
     {
-        year: '1959 年',
-        sales: 38
+        week: '星期六',
+        times: 38
     },
     {
-        year: '1960 年',
-        sales: 38
-    },
-    {
-        year: '1962 年',
-        sales: 38
+        week: '星期日',
+        times: 38
     }
 ];
-const cols = {
-    sales: {
-        tickInterval: 20
-    }
+
+const scale = {
+    week: { alias: '星期' },
+    times: { alias: '访问量', tickInterval: 20 }
 };
 
 class Line extends Component {
     render() {
         return (
-            <Chart height={400} data={data} scale={cols} forceFit>
-                <Axis name="year"/>
-                <Axis name="sales" />
-                <Tooltip
-                    crosshairs={{
-                        type: 'y'
-                    }}
-                />
-                <Geom type="interval" position="year*sales" />
+            <Chart height={400} data={data} scale={scale} forceFit>
+                <Axis name="week" />
+                <Axis title name="times" />
+                <Tooltip crosshairs={{ type: 'rect' }} />
+                <Geom type="interval" position="week*times" />
             </Chart>
         );
     }

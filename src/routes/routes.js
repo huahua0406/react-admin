@@ -8,7 +8,8 @@ const ButtonDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/B
 const IconDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/IconDemo/IconDemo'));
 const DialogDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/DialogDemo/DialogDemo'));
 const NotificationDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/NotificationDemo/NotificationDemo'));
-const TabsDemo = loadable(()=>import(/* webpackChunkName: 'tabs' */'@/pages/UI/TabsDemo/TabsDemo'));
+const TabsDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/TabsDemo/TabsDemo'));
+const GalleryDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/GalleryDemo/GalleryDemo'));
 const CarouselDemo = loadable(()=>import(/* webpackChunkName: 'ui' */'@/pages/UI/CarouselDemo/CarouselDemo'));
 
 // form
@@ -17,6 +18,13 @@ const StepForm = loadable(()=>import(/* webpackChunkName: 'form' */'@/pages/Form
 
 // table
 const BaseTable = loadable(()=>import(/* webpackChunkName: 'table' */'@/pages/Table/BaseTable/BaseTable'));
+
+// charts
+const BizCharts = loadable(()=>import(/* webpackChunkName: 'charts' */'@/pages/Charts/BizCharts'));
+const ECharts = loadable(()=>import(/* webpackChunkName: 'charts' */'@/pages/Charts/ECharts'));
+
+// rich-text
+const RichText = loadable(()=>import(/* webpackChunkName: 'editor' */'@/pages/Editor/Wysiwyg'));
 
 // about
 const About = loadable(()=>import(/* webpackChunkName: 'about' */'@/pages/About/About'));
@@ -49,6 +57,10 @@ const routes = [
         component: TabsDemo
     },
     {
+        path:'/ui/gallery',
+        component: GalleryDemo
+    },
+    {
         path: '/ui/carousel',
         component: CarouselDemo
     },
@@ -63,6 +75,18 @@ const routes = [
     {
         path:'/table/basetable',
         component: BaseTable
+    },
+    {
+        path:'/charts/bizcharts',
+        component: BizCharts
+    },
+    {
+        path:'/charts/echarts',
+        component: ECharts
+    },
+    {
+        path:'/editor/wysiwyg',
+        component: RichText
     },
     {
         path:'/about',

@@ -16,10 +16,10 @@ import api from './api';
 import './App.css'; 
 /**
  *  Api 全局变量
- *  App.js -> global.Api = api
+ *  App.js -> window.Api = api
  */
-global.Api = api
-global.Config = config
+window.Api = api
+window.Config = config
 
 // 路由
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';

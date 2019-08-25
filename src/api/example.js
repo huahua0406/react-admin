@@ -28,5 +28,18 @@ export default {
             data: formData,
             headers: { 'Content-Type': 'multipart/form-data' }
         });
+    },
+    getImgList(){
+        return request({
+            method: 'get',
+            url: 'http://gank.io/api/data/%E7%A6%8F%E5%88%A9/25/1'
+        });
+    },
+    getTableList(data){
+        return request({
+            method: 'post',
+            url:'https://www.easy-mock.com/mock/592501a391470c0ac1fab128/ms/table/list',
+            data
+        })
     }
 };

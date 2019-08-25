@@ -38,7 +38,7 @@ class BasicLayout extends Component {
                         {/* Content */}
                     </Content>
                     <Footer style={styles.footer}>
-                        {global.Config.copyright}
+                        {Config.copyright}
                     </Footer>
                     <BackTop />
                 </Layout>
