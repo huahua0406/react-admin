@@ -41,7 +41,8 @@ class Login extends Component {
                                     required: true,
                                     message: '请输入用户名!'
                                 }
-                            ]
+                            ],
+                            initialValue: 'admin'
                         })(
                             <Input
                                 prefix={
@@ -61,7 +62,8 @@ class Login extends Component {
                                     required: true,
                                     message: '请输入密码!'
                                 }
-                            ]
+                            ],
+                            initialValue: '123456'
                         })(
                             <Input
                                 prefix={

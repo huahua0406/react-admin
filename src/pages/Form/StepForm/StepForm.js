@@ -32,6 +32,16 @@ const tailFormItemLayout = {
     }
 };
 
+const styles = {
+    steps: {
+        maxWidth: 750,
+        margin: '16px auto'
+    },
+    desc: {
+        padding: '0 56px'
+    }
+};
+
 @connect(
     state => ({
         current: state.stepform.current,
@@ -58,7 +68,7 @@ class Step1 extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form className="stepForm">
+            <Form className="stepForm" id="step1">
                 <Form.Item
                     style={{ marginTop: 20 }}
                     {...formItemLayout}
@@ -90,7 +100,7 @@ class Step1 extends Component {
                     </Input.Group>
                 </Form.Item>
                 <Form.Item {...formItemLayout} label="收款人姓名">
-                    {getFieldDecorator('name', {
+                    {getFieldDecorator('receiverName', {
                         rules: [
                             {
                                 required: true,
@@ -105,7 +115,7 @@ class Step1 extends Component {
                     })(<Input placeholder="请输入收款人姓名" />)}
                 </Form.Item>
                 <Form.Item {...formItemLayout} label="转账金额">
-                    {getFieldDecorator('money', {
+                    {getFieldDecorator('amount', {
                         rules: [
                             {
                                 required: true,
@@ -172,6 +182,7 @@ class Step2 extends Component {
                 <Form.Item style={{ marginTop: 20 }} {...formItemLayout}>
                     <Alert
                         closable
+                        showIcon
                         type="info"
                         message="确认转账后，资金将直接打入对方账户，无法退回。"
                     />
@@ -183,11 +194,11 @@ class Step2 extends Component {
                     {data.receiverAccount}
                 </Form.Item>
                 <Form.Item {...formItemLayout} label="收款人姓名">
-                    {data.name}
+                    {data.receiverName}
                 </Form.Item>
                 <Form.Item {...formItemLayout} label="转账金额">
-                    <span>{data.money}元，</span>
-                    <span>五百元人民币整</span>
+                    <span>{data.amount}元</span>
+                    {/* <span>五百元人民币整</span> */}
                 </Form.Item>
                 <Divider />
                 <Form.Item
@@ -210,16 +221,7 @@ class Step2 extends Component {
                         />
                     )}
                 </Form.Item>
-                <Form.Item
-                    style={{ marginBottom: 8 }}
-                    wrapperCol={{
-                        xs: { span: 24, offset: 0 },
-                        sm: {
-                            span: formItemLayout.wrapperCol.span,
-                            offset: formItemLayout.labelCol.span
-                        }
-                    }}
-                    label="">
+                <Form.Item style={{ marginBottom: 8 }} {...tailFormItemLayout}>
                     <Button
                         type="primary"
                         onClick={this.handleSubmit}
@@ -247,12 +249,12 @@ class Step2 extends Component {
 @Form.create()
 class Step3 extends React.Component {
     render() {
-        const { data } = this.props;
+        const { data, setCurrentStep } = this.props;
         return (
             <div id="step3">
                 <div>
                     <div className="icon-box">
-                        <Icon type="check-circle" />
+                        <Icon type="info-circle" />
                     </div>
                     <div>
                         <h3 className="success">操作成功</h3>
@@ -289,7 +291,7 @@ class Step3 extends React.Component {
                     <div>
                         <Button
                             type="primary"
-                            onClick={() => this.props.setCurrent(0)}>
+                            onClick={() => setCurrentStep(0)}>
                             再转一笔
                         </Button>
                         <Button style={{ marginLeft: 8 }}>查看账单</Button>
@@ -311,8 +313,8 @@ class StepForm extends Component {
         );
     };
 
-    getStepContent = () => {
-        switch (this.props.current) {
+    getStepContent = value => {
+        switch (value) {
             case 1:
                 return <Step2 />;
             case 2:
@@ -325,24 +327,24 @@ class StepForm extends Component {
         const { current } = this.props;
         return (
             <Card title="分步表单">
-                <Steps current={current}>
+                <Steps current={current} style={styles.steps}>
                     <Step title="填写转账信息" />
                     <Step title="确认转账信息" />
                     <Step title="完成" />
                 </Steps>
-                <div className="steps-content">{this.getStepContent()}</div>
+                <div className="steps-content">
+                    {this.getStepContent(current)}
+                </div>
             </Card>
         );
     }
 }
 
-// mapStateToProps：将state映射到组件的props中
 const mapState = state => ({
     current: state.stepform.current,
     data: state.stepform.data
 });
 
-// mapDispatchToProps：将dispatch映射到组件的props中
 const mapDispatch = dispatch => ({
     setCurrentStep() {
         dispatch(setCurrentStep());
