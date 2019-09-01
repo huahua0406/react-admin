@@ -13,7 +13,6 @@ import { getFlatMenuKeys, urlToList, getMeunMatchKeys } from '@/utils/util';
 class CustomSider extends Component {
     constructor(props) {
         super(props);
-
         // https://www.jianshu.com/p/b123bbe0330c
         this.selectedKeys = memoize((pathname, menuData) => {
             return getMeunMatchKeys(
@@ -121,18 +120,24 @@ class CustomSider extends Component {
     };
 
     render() {
-        const { collapsed, width, menuData } = this.props;
+        const { collapsed, prefixCls, className, style, width } = this.props;
+        const classes = `${prefixCls} ${className}`;
+        const styles = {
+            ...style,
+            width
+        };
         return (
             <Sider
                 trigger={null}
                 collapsed={collapsed}
-                width={width}
-                className="sider fixed-sider">
-                {/* logo 部分 */}
+                className={classes}
+                style={styles}
+                width={width}>
+                {/* logo  */}
                 {this.renderSiderHeader()}
                 {/* logo  */}
                 {/* menu */}
-                {this.renderSiderBody(menuData)}
+                {this.renderSiderBody()}
                 {/* menu */}
             </Sider>
         );
@@ -164,7 +169,7 @@ const propTypes = {
 
 const defaultProps = {
     prefixCls: 'custom-sider',
-    className: '',
+    className: 'fixed-sider',
     style: {},
     appName: '',
     appLogo: '',

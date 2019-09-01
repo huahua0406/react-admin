@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
-import styles from './login.module.less';
+import './login.less';
 
-// @Form.create()
+@Form.create()
 class Login extends Component {
     componentDidMount() {
         console.log(Config.apiPrefix);
@@ -31,9 +31,9 @@ class Login extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <div className={styles['login-wrapper']}>
+            <div className="login-wrapper">
                 <Form onSubmit={this.handleSubmit} className="login-form">
-                    <h2 className={styles.title}>{Config.siteName}</h2>
+                    <h2 className="login-title">{Config.siteName}</h2>
                     <Form.Item>
                         {getFieldDecorator('username', {
                             rules: [
@@ -91,7 +91,7 @@ class Login extends Component {
         );
     }
 }
-// 不使用装饰器 => Form.create()(FormLogin);
+// 不使用装饰器 => Form.create({ name: 'login' })(Login);
 // 使用装饰器  => @Form.create()
 
-export default Form.create({ name: 'login' })(Login);
+export default Login;
