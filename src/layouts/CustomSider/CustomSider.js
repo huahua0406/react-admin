@@ -1,58 +1,51 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import memoize from 'memoize-one';
 import { Layout, Menu, Icon } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
-import menu from '@/config/menu'; // 菜单配置
+
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
+import { getFlatMenuKeys, urlToList, getMeunMatchKeys } from '@/utils/util';
+
 class CustomSider extends Component {
-    state = {
-        menuList: [],
-        selectedKey: '',
-        openKey: ''
-    };
-    componentDidMount() {
-        const menuList = this.renderMenu(menu);
-        this.setState({
-            menuList
+    constructor(props) {
+        super(props);
+
+        // https://www.jianshu.com/p/b123bbe0330c
+        this.selectedKeys = memoize((pathname, menuData) => {
+            return getMeunMatchKeys(
+                getFlatMenuKeys(menuData),
+                urlToList(pathname)
+            );
         });
-        const { pathname } = this.props.history.location;
-        this.setState({
-            selectedKey: pathname,
-            openKey: pathname.substr(0, pathname.lastIndexOf('/'))
-        });
-    }
-    componentWillReceiveProps(nextProps){
-        // console.log(nextProps);
-        const { pathname } = this.props.history.location;
-        this.setState({
-            selectedKey: pathname,
-            openKey: pathname.substr(0, pathname.lastIndexOf('/'))
-        });
+
+        const { pathname, menuData } = props;
+        console.log(this.selectedKeys(pathname, menuData));
+        this.state = {
+            openKeys: this.selectedKeys(pathname, menuData)
+        };
     }
 
-    menuClick = e => {
+    handleOpenChange = openKeys => {
+        console.log(openKeys);
         this.setState({
-            selectedKey: e.key
-        });
-    };
-    openMenu = v => {
-        this.setState({
-            openKey: v[v.length - 1]
+            openKeys
         });
     };
     //使用递归生成菜单
-    renderMenu = data => {
-        return data.map(item => {
+    renderMenu = menuData => {
+        return menuData.map(item => {
             if (item.children) {
                 return (
                     <SubMenu
-                        key={item.key}
+                        key={item.path}
                         title={
                             <span>
                                 <Icon type={item.icon} />
-                                <span className="nav-text">{item.title}</span>
+                                <span>{item.name}</span>
                             </span>
                         }>
                         {this.renderMenu(item.children)}
@@ -60,10 +53,10 @@ class CustomSider extends Component {
                 );
             } else {
                 return (
-                    <Menu.Item key={item.key}>
-                        <Link to={item.key}>
-                            {item.icon ? <Icon type={item.icon} /> : ''}
-                            <span className="nav-text">{item.title}</span>
+                    <Menu.Item key={item.path}>
+                        <Link to={item.path}>
+                            {item.icon && <Icon type={item.icon} />}
+                            <span>{item.name}</span>
                         </Link>
                     </Menu.Item>
                 );
@@ -71,26 +64,76 @@ class CustomSider extends Component {
         });
     };
 
+    renderSiderHeader = () => {
+        const {
+            collapsed,
+            appBaseUrl,
+            prefixCls,
+            appLogo,
+            appName
+        } = this.props;
+
+        if (!collapsed) {
+            return (
+                <Link to={appBaseUrl}>
+                    <div className={`${prefixCls}-header`}>
+                        <img
+                            className={`${prefixCls}-logo`}
+                            src={appLogo}
+                            alt="logo"
+                        />
+                        <div className={`${prefixCls}-appName`}>{appName}</div>
+                    </div>
+                </Link>
+            );
+        } else {
+            return (
+                <Link to={appBaseUrl}>
+                    <div className={`${prefixCls}-header`}>
+                        <img
+                            className={`${prefixCls}-logo`}
+                            src={appLogo}
+                            alt="logo"
+                        />
+                    </div>
+                </Link>
+            );
+        }
+    };
+
+    renderSiderBody = () => {
+        const { prefixCls, pathname, menuData } = this.props;
+        const { openKeys } = this.state;
+
+        return (
+            <div className={`${prefixCls}-body`}>
+                <Menu
+                    style={{ padding: '16px 0', width: '100%' }}
+                    mode="inline"
+                    theme="dark"
+                    openKeys={openKeys}
+                    selectedKeys={this.selectedKeys(pathname, menuData)}
+                    onOpenChange={this.handleOpenChange}>
+                    {this.renderMenu(menuData)}
+                </Menu>
+            </div>
+        );
+    };
+
     render() {
-        const { collapsed } = this.props;
-        const { menuList, selectedKey, openKey } = this.state;
+        const { collapsed, width, menuData } = this.props;
         return (
             <Sider
                 trigger={null}
-                collapsible
                 collapsed={collapsed}
-                width={200}
+                width={width}
                 className="sider fixed-sider">
-                <div className="logo" />
-                <Menu
-                    theme="dark"
-                    mode="inline"
-                    selectedKeys={[selectedKey]}
-                    openKeys={[openKey]}
-                    onClick={this.menuClick}
-                    onOpenChange={this.openMenu}>
-                    {menuList}
-                </Menu>
+                {/* logo 部分 */}
+                {this.renderSiderHeader()}
+                {/* logo  */}
+                {/* menu */}
+                {this.renderSiderBody(menuData)}
+                {/* menu */}
             </Sider>
         );
     }
@@ -99,6 +142,40 @@ class CustomSider extends Component {
 const mapState = state => ({
     collapsed: state.sider.collapsed
 });
+
+const propTypes = {
+    prefixCls: PropTypes.string,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    appName: PropTypes.string,
+    appLogo: PropTypes.string,
+    appBaseUrl: PropTypes.string,
+    width: PropTypes.number,
+    menuData: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string,
+            path: PropTypes.string,
+            icon: PropTypes.string,
+            children: PropTypes.array
+        })
+    ),
+    pathname: PropTypes.string
+};
+
+const defaultProps = {
+    prefixCls: 'custom-sider',
+    className: '',
+    style: {},
+    appName: '',
+    appLogo: '',
+    appBaseUrl: '/',
+    width: 256,
+    menuData: [],
+    pathname: '/'
+};
+
+CustomSider.propTypes = propTypes;
+CustomSider.defaultProps = defaultProps;
 
 export default connect(
     mapState,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Layout, BackTop } from 'antd';
 import CustomSider from '@/layouts/CustomSider/CustomSider';
@@ -7,6 +8,9 @@ import CustomHeader from '@/layouts/CustomHeader/CustomHeader';
 import Routes from '@/routes'; // 路由配置
 
 const { Content, Footer } = Layout;
+
+import menuData from '@/config/menu';
+import logo from '@/assets/logo.svg';
 
 const styles = {
     content: {
@@ -20,15 +24,27 @@ const styles = {
 };
 
 class BasicLayout extends Component {
+    constructor(props) {
+        super(props);
+        this.menuData = menuData;
+    }
+
     render() {
-        const { collapsed } = this.props;
+        const { collapsed, location } = this.props;
         return (
             <Layout className="basicLayout">
-                <CustomSider />
+                <CustomSider
+                    appBaseUrl="/"
+                    appName="React-Admin"
+                    prefixCls="custom-sider"
+                    appLogo={logo}
+                    menuData={this.menuData}
+                    pathname={location.pathname}
+                />
                 <Layout
                     style={{
                         minHeight: '100vh',
-                        paddingLeft: collapsed ? '80px' : '200px'
+                        paddingLeft: collapsed ? '80px' : '256px'
                     }}>
                     <CustomHeader />
                     <CustomBreadcrumb />
@@ -37,9 +53,7 @@ class BasicLayout extends Component {
                         <Routes />
                         {/* Content */}
                     </Content>
-                    <Footer style={styles.footer}>
-                        {Config.copyright}
-                    </Footer>
+                    <Footer style={styles.footer}>{Config.copyright}</Footer>
                     <BackTop />
                 </Layout>
             </Layout>
@@ -50,6 +64,8 @@ class BasicLayout extends Component {
 const mapState = state => ({
     collapsed: state.sider.collapsed
 });
+
+// TODO:PropTypes
 
 export default connect(
     mapState,

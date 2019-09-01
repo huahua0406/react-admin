@@ -1,99 +1,99 @@
 export default [
     {
-        title: '首页',
+        name: '首页',
         icon: 'home',
-        key: '/home'
+        path: '/home'
     },
     {
-        title: 'UI',
+        name: 'UI',
         icon: 'share-alt',
-        key: '/ui',
+        path: '/ui',
         children: [
             {
-                title: '按钮',
-                key: '/ui/button'
+                name: '按钮',
+                path: '/ui/button'
             },
             {
-                title: '图标',
-                key: '/ui/icon'
+                name: '图标',
+                path: '/ui/icon'
             },
             {
-                title: '对话框',
-                key: '/ui/dialog'
+                name: '对话框',
+                path: '/ui/dialog'
             },
             {
-                title: '通知提醒框',
-                key: '/ui/notification'
+                name: '通知提醒框',
+                path: '/ui/notification'
             },
             {
-                title: '标签页',
-                key: '/ui/tabs'
+                name: '标签页',
+                path: '/ui/tabs'
             },
             {
-                title: '图片画廊',
-                key: '/ui/gallery'
+                name: '图片画廊',
+                path: '/ui/gallery'
             },
             {
-                title: '轮播图',
-                key: '/ui/carousel'
+                name: '轮播图',
+                path: '/ui/carousel'
             }
         ]
     },
     {
-        title: '表单',
+        name: '表单',
         icon: 'form',
-        key: '/form',
+        path: '/form',
         children: [
             {
-                title: '基础表单',
-                key: '/form/baseform'
+                name: '基础表单',
+                path: '/form/baseform'
             },
             {
-                title: '分步表单',
-                key: '/form/stepform'
+                name: '分步表单',
+                path: '/form/stepform'
             }
         ]
     },
     {
-        title: '表格',
+        name: '表格',
         icon: 'table',
-        key: '/table',
+        path: '/table',
         children: [
             {
-                title: '基础表格',
-                key: '/table/basetable'
+                name: '基础表格',
+                path: '/table/basetable'
             }
         ]
     },
     {
-        title: '图表',
+        name: '图表',
         icon: 'line-chart',
-        key: '/charts',
+        path: '/charts',
         children: [
             {
-                title: 'BizCharts',
-                key: '/charts/bizcharts'
+                name: 'BizCharts',
+                path: '/charts/bizcharts'
             },
             {
-                title: 'ECharts',
-                key: '/charts/echarts'
+                name: 'ECharts',
+                path: '/charts/echarts'
             }
         ]
     },
     {
-        title: '富文本',
+        name: '富文本',
         icon: 'edit',
-        key: '/editor',
+        path: '/editor',
         children: [
             {
-                title: '富文本编辑器',
-                key: '/editor/wysiwyg'
+                name: '富文本编辑器',
+                path: '/editor/wysiwyg'
             }
         ]
     },
     {
-        title: '关于',
+        name: '关于',
         icon: 'info-circle',
-        key: '/about',
-    },
+        path: '/about'
+    }
 ];

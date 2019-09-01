@@ -8,7 +8,7 @@
     padding: 0 24px;
     cursor: pointer;
     transition: color 0.3s;
-    color: rgba(0,0,0,0.65);;
+    color: rgba(0, 0, 0, 0.65);
 }
 
 .App .trigger:hover {
@@ -21,21 +21,49 @@
     margin: 16px;
 }
 
-
 .basicLayout .ant-layout {
-    transition: all .2s;
+    transition: all 0.2s;
 }
 
-.sider{
+.sider {
     position: relative;
     z-index: 10;
     min-height: 100vh;
-    box-shadow: 2px 0 6px rgba(0,21,41,.35);
+    box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
 }
 
-.sider.fixed-sider{
+.sider.fixed-sider {
     position: fixed;
     top: 0;
     left: 0;
-    box-shadow: 2px 0 8px 0 rgba(29,35,41,.05);
+    box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
+}
+
+.custom-sider-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #002140;
+    height: 64px;
+    padding-left: 24px;
+}
+
+.custom-sider-appName {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.custom-sider-logo {
+    height: 32px;
+    width: 32px;
+    margin-right: 12px;
+}
+.custom-sider-appName {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
 }
