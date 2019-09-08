@@ -1,12 +1,40 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Layout, Icon, Badge, Menu, Dropdown, Avatar, message } from 'antd';
+import {
+    Layout,
+    Icon,
+    Badge,
+    Menu,
+    Dropdown,
+    Avatar,
+    Popover,
+    message
+} from 'antd';
 const { Header } = Layout;
 import { siderCollapsed } from '@/redux/actions/sider';
 import { judgeIsSupportFull, fullScreen, fullExit } from '@/utils/screenfull';
 
 import './header.less';
+
+const notices = [
+    {
+        id: 0,
+        title: 'Task A',
+        message: 'Task needs to be done before 2020.08.20'
+    },
+    {
+        id: 1,
+        title: 'Task B',
+        message: 'Task needs to be done before 2020.08.20'
+    },
+    {
+        id: 2,
+        title: 'Task C',
+        message: 'Task needs to be done before 2020.08.20'
+    }
+];
 
 class CustomHeader extends Component {
     state = {
@@ -45,7 +73,7 @@ class CustomHeader extends Component {
 
     // 全屏事件
     handleScreenFull = () => {
-        console.log(this.state.isScreenFull)
+        console.log(this.state.isScreenFull);
         this.state.isScreenFull ? fullExit() : fullScreen();
     };
 
@@ -55,26 +83,77 @@ class CustomHeader extends Component {
         } else if (key == 2) {
             message.info(`Click on item ${key}`);
         } else {
-            this.logout();
+            this.handleLogout();
         }
     };
 
-    logout = () => {
+    handleLogout = () => {
         this.props.history.replace('/login');
     };
 
-    goTabs = () => {
-        this.props.history.push('/ui/tabs');
+    deleteNotice = id => {
+        console.log(id);
     };
 
+    getNoticeMenu = () => {
+        const { prefixCls }  = this.props;
+        const noticeMenu =  notices.length === 0 ? (
+            <div className={`${prefixCls}-noticeEmpty`}>
+                你的消息通知为空
+            </div>
+        ) : (
+            notices.map(notice => (
+                <div
+                    key={notice.id}
+                    className={`${prefixCls}-noticeItem`}
+                    onClick={() => this.deleteNotice(notice.id)}
+                    role="presentation">
+                    <div className={`${prefixCls}-noticeTitle`}>
+                        {notice.title}
+                    </div>
+                    <div className={`${prefixCls}-noticeMessage`}>
+                        {notice.message}
+                    </div>
+                </div>
+            ))
+        );
+        return noticeMenu
+    }
+
+    getUserMenu = () => (
+        <Menu onClick={this.handleMenuClick}>
+            <Menu.Item key="1" disabled>
+                <Icon type="user" />
+                <span>个人资料</span>
+            </Menu.Item>
+            <Menu.Item key="2" disabled>
+                <Icon type="setting" />
+                <span>系统设置</span>
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item key="3">
+                <Icon type="logout" />
+                <span>退出登录</span>
+            </Menu.Item>
+        </Menu>
+    )
+
     render() {
-        const { collapsed, toggleCollapsed, isScreenFull } = this.props;
+        const {
+            collapsed,
+            toggleCollapsed,
+            isScreenFull,
+            prefixCls,
+            styles
+        } = this.props;
+            
+
         return (
             <Header
-                style={{ background: '#fff', padding: 0 }}
-                className="header">
+                style={styles}
+                className={prefixCls}>
                 <Icon
-                    className="trigger"
+                    className={`${prefixCls}-trigger`}
                     type={collapsed ? 'menu-unfold' : 'menu-fold'}
                     onClick={toggleCollapsed}
                 />
@@ -99,26 +178,25 @@ class CustomHeader extends Component {
                             }
                         />
                     </Menu.Item>
-                    <Menu.Item key="notice" onClick={this.goTabs}>
-                        <Badge dot>
-                            <Icon type="bell" />
-                        </Badge>
+                    <Menu.Item key="notice">
+                        <Popover
+                            placement="bottomRight"
+                            arrowPointAtCenter
+                            trigger="hover"
+                            title="消息通知"
+                            content={this.getNoticeMenu()}>
+                            <Badge dot>
+                                <Icon type="bell" />
+                            </Badge>
+                        </Popover>
                     </Menu.Item>
                     <Menu.Item key="user">
+                        {/* overlay ===> menu||() => menu */}
                         <Dropdown
-                            overlay={() => (
-                                <Menu onClick={this.handleMenuClick}>
-                                    <Menu.Item key="1">个人资料</Menu.Item>
-                                    <Menu.Item key="2">系统设置</Menu.Item>
-                                    <Menu.Divider />
-                                    <Menu.Item key="3">退出登录</Menu.Item>
-                                </Menu>
-                            )}>
+                            overlay={this.getUserMenu()}>
                             <a className="ant-dropdown-link">
-                                {/* <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /> */}
-                                <span>
-                                    {this.state.sysName}&emsp;
-                                </span>
+                                {/* <span>{this.state.sysName}&emsp;</span> */}
+                                <Avatar>{this.state.sysName}</Avatar>
                                 <Icon type="down" />
                             </a>
                         </Dropdown>
@@ -129,17 +207,30 @@ class CustomHeader extends Component {
     }
 }
 
-// mapStateToProps：将state映射到组件的props中
 const mapState = state => ({
     collapsed: state.sider.collapsed
 });
 
-// mapDispatchToProps：将dispatch映射到组件的props中
 const mapDispatch = dispatch => ({
     toggleCollapsed() {
         dispatch(siderCollapsed());
     }
 });
+
+const propTypes = {
+    prefixCls: PropTypes.string,
+    className: PropTypes.string,
+    styles: PropTypes.object
+};
+
+const defaultProps = {
+    prefixCls: 'custom-header',
+    className: '', //todo: fixed-header
+    styles: { background: '#fff', padding: 0 }
+};
+
+CustomHeader.propTypes = propTypes;
+CustomHeader.defaultProps = defaultProps;
 
 export default connect(
     mapState,

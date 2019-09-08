@@ -10,6 +10,8 @@ const { SubMenu } = Menu;
 
 import { getFlatMenuKeys, urlToList, getMeunMatchKeys } from '@/utils/util';
 
+import './sider.less';
+
 class CustomSider extends Component {
     constructor(props) {
         super(props);
@@ -77,7 +79,7 @@ class CustomSider extends Component {
                 <Link to={appBaseUrl}>
                     <div className={`${prefixCls}-header`}>
                         <img
-                            className={`${prefixCls}-logo`}
+                            className={`${prefixCls}-appLogo`}
                             src={appLogo}
                             alt="logo"
                         />
@@ -90,7 +92,7 @@ class CustomSider extends Component {
                 <Link to={appBaseUrl}>
                     <div className={`${prefixCls}-header`}>
                         <img
-                            className={`${prefixCls}-logo`}
+                            className={`${prefixCls}-appLogo`}
                             src={appLogo}
                             alt="logo"
                         />
@@ -133,12 +135,8 @@ class CustomSider extends Component {
                 className={classes}
                 style={styles}
                 width={width}>
-                {/* logo  */}
                 {this.renderSiderHeader()}
-                {/* logo  */}
-                {/* menu */}
                 {this.renderSiderBody()}
-                {/* menu */}
             </Sider>
         );
     }
