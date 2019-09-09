@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+##待办
+
+1.package.json  react-scripts 干嘛的？
+2.https://www.jianshu.com/p/b0ac39fcd7fe
+3.https://reacttraining.com/react-router/web/example/auth-workflow
+4.配置代理
+5.全局面包屑
+
 ## Available Scripts
 
 In the project directory, you can run:

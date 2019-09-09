@@ -45,7 +45,7 @@ class CustomSider extends Component {
                         key={item.path}
                         title={
                             <span>
-                                <Icon type={item.icon} />
+                                {item.icon && <Icon type={item.icon} />}
                                 <span>{item.name}</span>
                             </span>
                         }>

@@ -40,6 +40,31 @@ export default [
         ]
     },
     {
+        name: '多级菜单',
+        icon: 'menu',
+        path: '/nested',
+        children: [
+            {
+                name: '菜单1-1',
+                path: '/1-1',
+                children: [
+                    {
+                        name: '菜单1-1-1',
+                        path: '/1-1-1'
+                    },
+                    {
+                        name: '菜单1-1-2',
+                        path: '/1-1-2'
+                    }
+                ]
+            },
+            {
+                name: '菜单1-2',
+                path: '/1-2'
+            }
+        ]
+    },
+    {
         name: '表单',
         icon: 'form',
         path: '/form',
