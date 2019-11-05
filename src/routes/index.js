@@ -1,23 +1,14 @@
-import React from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
-import routesArr from './routes';
-// console.log(routesArr);
+import React, { Component } from 'react';
+import { HashRouter } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+// 路由
+import routes from '@/routes/routes';
+// console.log(routes);
 
-const renderRoutes = routes => {
-    // TODO:未登录 跳转到login Redirect
-    return (
-        <Switch>
-            {routesArr.map((item, index) => {
-                return (
-                    <Route
-                        key={index}
-                        path={item.path}
-                        component={item.component}
-                    />
-                );
-            })}
-        </Switch>
-    );
-};
-
-export default renderRoutes;
+class Router extends Component {
+	render() {
+		const isLogged = sessionStorage.getItem('isLogin');
+		return <HashRouter>{isLogged ? renderRoutes(routes) : renderRoutes([])}</HashRouter>;
+	}
+}
+export default Router;
