@@ -3,7 +3,7 @@ import { createLogger } from 'redux-logger';
 // redux-thunk 处理异步
 import thunk from 'redux-thunk';
 
-import reducers from './reducers';
+import rootReducer from './reducers';
 
 
 // 调用日志打印方法 collapsed是让action折叠，看着舒服点
@@ -25,7 +25,7 @@ const composeEnhancers =
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
 //创建store
-const store = createStore(reducers, enhancer);
+const store = createStore(rootReducer, enhancer);
 
 store.subscribe(() => {
     console.log(store.getState());

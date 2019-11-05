@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Modal, Button } from 'antd';
 
-const { confirm } = Modal;
+// const { confirm } = Modal;
 
 const cardStyles = {
     marginBottom: 20

@@ -8,7 +8,7 @@ class GalleryDemo extends Component {
     };
 
     async componentDidMount() {
-        const result = await Api.getImgList();
+        const result = await window.Api.getImgList();
         let arr = result.data.results;
         let tempArr = [];
         tempArr[0] = arr.slice(0, 5);
@@ -38,6 +38,7 @@ class GalleryDemo extends Component {
                     cover={
                         <img
                             src={item.url}
+                            alt="img"
                             onClick={() => this.openGallery(item.url)}
                         />
                     }>

@@ -1,4 +1,4 @@
-import * as constants from '../constants';
+import * as constants from '@/redux/constants/constants';
 
 export const setCurrentStep = (current) => ({
     type: constants.SET_CURRENT_STEP,

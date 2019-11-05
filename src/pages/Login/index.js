@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
-import './login.less';
+import './index.less';
 
 @Form.create()
 class Login extends Component {

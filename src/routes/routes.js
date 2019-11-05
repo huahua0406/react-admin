@@ -4,26 +4,26 @@ import { Redirect } from 'react-router-dom';
 import loadable from '@/utils/loadable';
 
 // 路由  参数一定要是函数，否则不会懒加载，只会代码拆分
-import BasicLayout from '@/layouts/BasicLayout/BasicLayout';
-import Login from '@/pages/Login/Login';
+import BasicLayout from '@/layouts/BasicLayout';
+import Login from '@/pages/Login';
 // import NotFound from '@/pages/Error/NotFound';
-const Home = loadable(() => import(/* webpackChunkName: 'home' */ '@/pages/Home/Home'));
+const Home = loadable(() => import(/* webpackChunkName: 'home' */ '@/pages/Home'));
 
 // ui
-const ButtonDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/ButtonDemo/ButtonDemo'));
-const IconDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/IconDemo/IconDemo'));
-const DialogDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/DialogDemo/DialogDemo'));
-const NotificationDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/NotificationDemo/NotificationDemo'));
-const TabsDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/TabsDemo/TabsDemo'));
-const GalleryDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/GalleryDemo/GalleryDemo'));
-const CarouselDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/CarouselDemo/CarouselDemo'));
+const ButtonDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/ButtonDemo'));
+const IconDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/IconDemo'));
+const DialogDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/DialogDemo'));
+const NotificationDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/NotificationDemo'));
+const TabsDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/TabsDemo'));
+const GalleryDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/GalleryDemo'));
+const CarouselDemo = loadable(() => import(/* webpackChunkName: 'ui' */ '@/pages/UI/CarouselDemo'));
 
 // form
-const BaseForm = loadable(() => import(/* webpackChunkName: 'form' */ '@/pages/Form/BaseForm/BaseForm'));
-const StepForm = loadable(() => import(/* webpackChunkName: 'form' */ '@/pages/Form/StepForm/StepForm'));
+const BaseForm = loadable(() => import(/* webpackChunkName: 'form' */ '@/pages/Form/BaseForm'));
+const StepForm = loadable(() => import(/* webpackChunkName: 'form' */ '@/pages/Form/StepForm'));
 
 // table
-const BaseTable = loadable(() => import(/* webpackChunkName: 'table' */ '@/pages/Table/BaseTable/BaseTable'));
+const BaseTable = loadable(() => import(/* webpackChunkName: 'table' */ '@/pages/Table/BaseTable'));
 
 // charts
 const BizCharts = loadable(() => import(/* webpackChunkName: 'charts' */ '@/pages/Charts/BizCharts'));
@@ -33,7 +33,7 @@ const ECharts = loadable(() => import(/* webpackChunkName: 'charts' */ '@/pages/
 const RichText = loadable(() => import(/* webpackChunkName: 'editor' */ '@/pages/Editor/Wysiwyg'));
 
 // about
-const About = loadable(() => import(/* webpackChunkName: 'about' */ '@/pages/About/About'));
+const About = loadable(() => import(/* webpackChunkName: 'about' */ '@/pages/About'));
 
 const NotFound = loadable(()=>import(/* webpackChunkName: 'notfound' */'@/pages/Error/NotFound'));
 

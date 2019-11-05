@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Layout, BackTop } from 'antd';
-import CustomSider from '@/layouts/CustomSider/CustomSider';
-import CustomBreadcrumb from '@/layouts/CustomBreadcrumb/CustomBreadcrumb';
-import CustomHeader from '@/layouts/CustomHeader/CustomHeader';
-// 路由菜单配置
+import CustomSider from '@/layouts/CustomSider';
+import CustomBreadcrumb from '@/layouts/CustomBreadcrumb';
+import CustomHeader from '@/layouts/CustomHeader';
+// 菜单相关路由
 import menuData from '@/config/menu';
 import logo from '@/assets/logo.svg';
 

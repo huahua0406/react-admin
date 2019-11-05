@@ -12,11 +12,11 @@ import {
     Popover,
     message
 } from 'antd';
-const { Header } = Layout;
 import { siderCollapsed } from '@/redux/actions/sider';
 import { judgeIsSupportFull, fullScreen, fullExit } from '@/utils/screenfull';
 
 import './header.less';
+const { Header } = Layout;
 
 const notices = [
     {
@@ -78,9 +78,9 @@ class CustomHeader extends Component {
     };
 
     handleMenuClick = ({ key }) => {
-        if (key == 1) {
+        if (key === 1) {
             message.info(`Click on item ${key}`);
-        } else if (key == 2) {
+        } else if (key === 2) {
             message.info(`Click on item ${key}`);
         } else {
             this.handleLogout();
@@ -194,11 +194,11 @@ class CustomHeader extends Component {
                         {/* overlay ===> menu||() => menu */}
                         <Dropdown
                             overlay={this.getUserMenu()}>
-                            <a className="ant-dropdown-link">
+                            <span className="ant-dropdown-link">
                                 {/* <span>{this.state.sysName}&emsp;</span> */}
                                 <Avatar>{this.state.sysName}</Avatar>
                                 <Icon type="down" />
-                            </a>
+                            </span>
                         </Dropdown>
                     </Menu.Item>
                 </Menu>

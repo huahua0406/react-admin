@@ -5,12 +5,12 @@ import memoize from 'memoize-one';
 import { Layout, Menu, Icon } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 
-const { Sider } = Layout;
-const { SubMenu } = Menu;
-
 import { getFlatMenuKeys, urlToList, getMeunMatchKeys } from '@/utils/util';
 
 import './sider.less';
+
+const { Sider } = Layout;
+const { SubMenu } = Menu;
 
 class CustomSider extends Component {
     constructor(props) {
