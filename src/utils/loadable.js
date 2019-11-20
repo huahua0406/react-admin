@@ -5,12 +5,13 @@ import 'nprogress/nprogress.css';
 
 //通用的Loading组件
 class Loading extends Component {
-    componentWillMount() {
-        NProgress.start();
+    constructor(props) {
+        super(props)
+        NProgress.start()
     }
 
-    componentWillUnmount() {
-        NProgress.done();
+    componentDidMount() {
+        NProgress.done()
     }
 
     render() {

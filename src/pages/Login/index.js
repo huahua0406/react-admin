@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
+import Api from '@/api'
+import Config from '@/config/config';
 import './index.less';
 
+/**
+ * 不使用装饰器 => export default Form.create({ name: 'login' })(Login);  
+ * 使用装饰器  => @Form.create()  export default Login
+ */
 @Form.create()
 class Login extends Component {
     componentDidMount() {
-        console.log(Config.apiPrefix);
-        console.log(Api);
+        console.log('login');
     }
 
     handleSubmit = e => {
@@ -16,7 +21,10 @@ class Login extends Component {
                 console.log('Received values of form: ', values);
                 const result = await Api.login(values);
                 console.log(result);
-                if (result.data.data.code == 0) {
+                // const { from } = this.props.location.state || { from: {pathname: '/' } }
+                // https://github.com/ReactTraining/react-router/issues/4962
+                // https://tylermcginnis.com/react-router-protected-routes-authentication/
+                if (result.data.data.code === 0) {
                     message.info('登录成功');
                     this.props.history.replace('/');
                 } else {
@@ -91,7 +99,5 @@ class Login extends Component {
         );
     }
 }
-// 不使用装饰器 => Form.create({ name: 'login' })(Login);
-// 使用装饰器  => @Form.create()
 
 export default Login;

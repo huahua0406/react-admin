@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Layout, BackTop } from 'antd';
 import CustomSider from '@/layouts/CustomSider';
@@ -9,7 +10,12 @@ import CustomHeader from '@/layouts/CustomHeader';
 import menuData from '@/config/menu';
 import logo from '@/assets/logo.svg';
 
-import { renderRoutes, matchRoutes } from 'react-router-config';
+import Router from '@/routes';
+
+import Config from '@/config/config';
+console.log(Router);
+
+// import { renderRoutes, matchRoutes } from 'react-router-config';
 
 const { Content, Footer } = Layout;
 
@@ -24,18 +30,16 @@ const styles = {
 	}
 };
 
-// TODO: 更改为函数组件
-
+@withRouter
 class BasicLayout extends Component {
-	constructor(props) {
-		super(props);
-		this.menuData = menuData;
-	}
+	state = {
+		menuData
+	};
 
 	render() {
-		const { collapsed, location, route } = this.props;
-        console.log('props: ', route);
-        console.log('matchRoutes', matchRoutes(route.routes, "/home"));
+		const { menuData } = this.state;
+		const { collapsed, location } = this.props;
+		// console.log('matchRoutes', matchRoutes(route.routes, '/home'));
 		return (
 			<Layout className="basicLayout">
 				<CustomSider
@@ -43,7 +47,7 @@ class BasicLayout extends Component {
 					appName="React-Admin"
 					prefixCls="custom-sider"
 					appLogo={logo}
-					menuData={this.menuData}
+					menuData={menuData}
 					pathname={location.pathname}
 				/>
 				<Layout
@@ -55,12 +59,10 @@ class BasicLayout extends Component {
 					<CustomBreadcrumb />
 					<Content style={styles.content}>
 						{/* Content */}
-						{/* child routes won't render without this */}
-						{/* 渲染当前路由下的子路由所对应的组件，第二个参数是给子路由传入的额外自定义的参数 */}
-						{renderRoutes(route.routes, { someProp: 'these extra props are optional' })}
+						<Router />
 						{/* Content */}
 					</Content>
-					<Footer style={styles.footer}>{window.Config.copyright}</Footer>
+					<Footer style={styles.footer}>{Config.copyright}</Footer>
 					<BackTop />
 				</Layout>
 			</Layout>
@@ -72,9 +74,8 @@ const mapState = state => ({
 	collapsed: state.sider.collapsed
 });
 
-// TODO:PropTypes
+BasicLayout.propTypes = {
+	collapsed: PropTypes.bool
+};
 
-export default connect(
-	mapState,
-	null
-)(BasicLayout);
+export default connect(mapState, null)(BasicLayout);

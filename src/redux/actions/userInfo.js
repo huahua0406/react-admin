@@ -9,13 +9,13 @@ export const setUserInfo = (info) => ({
 
 export const login = (accout, password) => {
 	return (dispatch) => {
-		axios.get('/api/login.json?account=' + accout + '&password=' + password).then((res) => {
-			const result = res.data.data;
-			if (result) {
-				dispatch(setUserInfo(result))
-			}else {
-				alert('登陆失败')
-			}
-		})
+		// axios.get('/api/login.json?account=' + accout + '&password=' + password).then((res) => {
+		// 	const result = res.data.data;
+		// 	if (result) {
+		// 		dispatch(setUserInfo(result))
+		// 	}else {
+		// 		alert('登陆失败')
+		// 	}
+		// })
 	}
 }

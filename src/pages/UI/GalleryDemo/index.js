@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Card, Modal, PageHeader } from 'antd';
+import Api from '@/api'
 
 class GalleryDemo extends Component {
     state = {
@@ -8,7 +9,7 @@ class GalleryDemo extends Component {
     };
 
     async componentDidMount() {
-        const result = await window.Api.getImgList();
+        const result = await Api.getImgList();
         let arr = result.data.results;
         let tempArr = [];
         tempArr[0] = arr.slice(0, 5);
