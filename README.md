@@ -1,14 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-##待办
-
-<!-- 1.package.json  react-scripts 干嘛的？
-2.https://www.jianshu.com/p/b0ac39fcd7fe
-3.https://reacttraining.com/react-router/web/example/auth-workflow
-4.配置代理
-5.全局面包屑 https://www.jianshu.com/p/c0ba97f2b6a1
-https://github.com/zhangZhiHao1996/react-admin-master/blob/master/src/components/CustomBreadcrumb/index.js
-6. rootReducers -->
 
 ## Available Scripts
 

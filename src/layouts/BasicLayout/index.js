@@ -6,14 +6,14 @@ import { Layout, BackTop } from 'antd';
 import CustomSider from '@/layouts/CustomSider';
 import CustomBreadcrumb from '@/layouts/CustomBreadcrumb';
 import CustomHeader from '@/layouts/CustomHeader';
+import ContentMain from '@/layouts/ContentMain';
+
 // 菜单相关路由
 import menuData from '@/config/menu';
 import logo from '@/assets/logo.svg';
 
-import Router from '@/routes';
 
 import Config from '@/config/config';
-console.log(Router);
 
 // import { renderRoutes, matchRoutes } from 'react-router-config';
 
@@ -59,7 +59,7 @@ class BasicLayout extends Component {
 					<CustomBreadcrumb />
 					<Content style={styles.content}>
 						{/* Content */}
-						<Router />
+						<ContentMain />
 						{/* Content */}
 					</Content>
 					<Footer style={styles.footer}>{Config.copyright}</Footer>
