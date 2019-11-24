@@ -1,11 +1,11 @@
 import * as constants from '@/redux/constants/constants';
 
-const defaultStore = {
+const initialState = {
     current: 0,
     data: {}
 };
 
-export default (state = defaultStore, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case constants.SET_CURRENT_STEP:
             return Object.assign({}, state, {

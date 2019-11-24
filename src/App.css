@@ -2,9 +2,4 @@
     height: 100%;
 }
 
-
-
-.basicLayout .ant-layout {
-    transition: all 0.2s;
-}
-
+/* TODO: 引入styles下面的样式*/

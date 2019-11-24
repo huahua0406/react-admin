@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Icon } from 'antd';
-import './error.less';
+import './index.less';
 
 class NotFound extends Component {
     render() {

@@ -12,10 +12,7 @@ import ContentMain from '@/layouts/ContentMain';
 import menuData from '@/config/menu';
 import logo from '@/assets/logo.svg';
 
-
 import Config from '@/config/config';
-
-// import { renderRoutes, matchRoutes } from 'react-router-config';
 
 const { Content, Footer } = Layout;
 
@@ -30,7 +27,6 @@ const styles = {
 	}
 };
 
-@withRouter
 class BasicLayout extends Component {
 	state = {
 		menuData
@@ -39,7 +35,6 @@ class BasicLayout extends Component {
 	render() {
 		const { menuData } = this.state;
 		const { collapsed, location } = this.props;
-		// console.log('matchRoutes', matchRoutes(route.routes, '/home'));
 		return (
 			<Layout className="basicLayout">
 				<CustomSider
@@ -58,9 +53,9 @@ class BasicLayout extends Component {
 					<CustomHeader />
 					<CustomBreadcrumb />
 					<Content style={styles.content}>
-						{/* Content */}
+						{/* Content Main */}
 						<ContentMain />
-						{/* Content */}
+						{/* Content Main */}
 					</Content>
 					<Footer style={styles.footer}>{Config.copyright}</Footer>
 					<BackTop />
@@ -78,4 +73,4 @@ BasicLayout.propTypes = {
 	collapsed: PropTypes.bool
 };
 
-export default connect(mapState, null)(BasicLayout);
+export default withRouter(connect(mapState, null)(BasicLayout));

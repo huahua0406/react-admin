@@ -5,7 +5,7 @@ import ReactEcharts from 'echarts-for-react';
 // 加载全部文件
 // import echarts from 'echarts';
 
-//按需加载
+// 按需加载
 import echarts from 'echarts/lib/echarts'
 //导入折线图， 折线图是line,饼图pie,柱形图bar
 import 'echarts/lib/chart/bar'; 
@@ -17,7 +17,7 @@ import 'echarts/lib/component/legend';
 import 'echarts/lib/component/markPoint';
 
 class ECharts extends Component {
-    componentWillMount() {
+    componentDidMount() {
         // 主题设置：https://echarts.baidu.com/theme-builder/#acc-theme-body
         echarts.registerTheme('my_theme', {
             color: [

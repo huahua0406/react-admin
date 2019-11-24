@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import memoize from 'memoize-one';
 import { Layout, Menu, Icon } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
-
-import { getFlatMenuKeys, urlToList, getMeunMatchKeys } from '@/utils/util';
-
 import './sider.less';
 
 const { Sider } = Layout;
@@ -15,26 +11,70 @@ const { SubMenu } = Menu;
 class CustomSider extends Component {
     constructor(props) {
         super(props);
-        // https://www.jianshu.com/p/b123bbe0330c
-        this.selectedKeys = memoize((pathname, menuData) => {
-            return getMeunMatchKeys(
-                getFlatMenuKeys(menuData),
-                urlToList(pathname)
-            );
-        });
-
-        const { pathname, menuData } = props;
-        console.log(this.selectedKeys(pathname, menuData));
         this.state = {
-            openKeys: this.selectedKeys(pathname, menuData)
-        };
+            selectedKeys: ['/home'],
+            openKeys: [],
+            rootSubmenuKeys: [] // submenu keys of first level
+        }
+    }
+    // 处理 pathname 获取openKeys 
+    // TODO:可以优化
+    getOpenKeys = url => {
+        let newStr = '',
+            newArr = [],
+            arr = url.split('/').map(i => `/${i}`)
+        for (let i = 1; i < arr.length - 1; i++) {
+            newStr += arr[i]
+            newArr.push(newStr)
+        }
+        return newArr
     }
 
-    handleOpenChange = openKeys => {
-        console.log(openKeys);
+    
+
+    // 页面刷新的时候可以定位到 menu 显示
+    componentDidMount() {
+        const { menuData } = this.props;
+        const { pathname } = this.props.location;
+        const rootSubmenuKeys = menuData.filter(item => item.key&&item.children).map(item => item.key)
+
+        // console.log(this.getOpenKeys(pathname), /vv/);
+
+        // 设置菜单的默认值
         this.setState({
-            openKeys
-        });
+            rootSubmenuKeys,
+            selectedKeys: [pathname],
+            openKeys: this.getOpenKeys(pathname)
+        })
+        
+    };
+
+    // 点击面包屑导航时 侧边栏同步响应
+    componentDidUpdate(prevProps, prevState) {
+        let { pathname } = this.props.location
+        if (prevProps.location.pathname !== pathname) {
+            this.setState({
+                selectedKeys: [pathname],
+                openKeys: this.getOpenKeys(pathname)
+            })
+        }
+    }
+
+    // 只展开一个 SubMenu
+    handleOpenChange = openKeys => {
+        console.log(openKeys, /openkey/);
+        // 最新展开的 SubMenu
+        const latestOpenKey = openKeys.find(
+            key => this.state.openKeys.indexOf(key) === -1
+        );
+        console.log(latestOpenKey, /lastest/);
+        if (this.state.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+            this.setState({ openKeys });
+        } else {
+            this.setState({
+                openKeys: latestOpenKey ? [latestOpenKey] : [...openKeys]
+            });
+        }
     };
     //使用递归生成菜单
     renderMenu = menuData => {
@@ -65,6 +105,7 @@ class CustomSider extends Component {
         });
     };
 
+    // LOGO
     renderSiderHeader = () => {
         const {
             collapsed,
@@ -103,17 +144,18 @@ class CustomSider extends Component {
     };
 
     renderSiderBody = () => {
-        const { prefixCls, pathname, menuData } = this.props;
-        const { openKeys } = this.state;
+        const { prefixCls, menuData } = this.props;
+        const { openKeys, selectedKeys } = this.state;
 
         return (
             <div className={`${prefixCls}-body`}>
                 <Menu
                     style={{ padding: '16px 0', width: '100%' }}
-                    mode="inline"
+                    subMenuOpenDelay={0.3}
                     theme="dark"
+                    mode="inline"
                     openKeys={openKeys}
-                    selectedKeys={this.selectedKeys(pathname, menuData)}
+                    selectedKeys={selectedKeys}
                     onOpenChange={this.handleOpenChange}>
                     {this.renderMenu(menuData)}
                 </Menu>

@@ -279,7 +279,7 @@ class BaseForm extends Component {
                             valuePropName: 'checked'
                         })(
                             <Checkbox>
-                                我已经阅读过 <a href="">协议</a>
+                                我已经阅读过 <a href="">注册协议</a>
                             </Checkbox>
                         )}
                     </Form.Item>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Divider, Tag, Button, message, Modal } from 'antd';
-
+import Api from '@/api';
 class BaseTable extends Component {
     state = {
         data: [],

@@ -1,11 +1,11 @@
 import * as constants from '@/redux/constants/constants';
 
-const defaultStore = {
+const initialState = {
     collapsed: false,
 };
 
 
-export default (state = defaultStore, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case constants.SIDER_COLLAPSED:
             return Object.assign({}, state, {

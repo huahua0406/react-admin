@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, withRouter, Route, Redirect } from 'react-router-dom';
 import PrivateRoute from '@/components/PrivateRoute';
-import { routes } from '@/router/routes';
+import routes from '@/routes';
 import './index.css';
 
-@withRouter
 class ContentMain extends Component {
 	render() {
 		return (
@@ -24,4 +23,4 @@ class ContentMain extends Component {
 		);
 	}
 }
-export default ContentMain;
+export default withRouter(ContentMain);

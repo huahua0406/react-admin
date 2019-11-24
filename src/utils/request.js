@@ -12,7 +12,7 @@ axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-ur
 axiosInstance.interceptors.request.use(
 	config => {
         // 这里可以自定义一些config 配置, 比如headers添加token
-        // token && (config.headers.Authorization = token)
+        // token && (config.headers.Authorization = `Bearer token`)
 		return config;
 	},
 	function(error) {

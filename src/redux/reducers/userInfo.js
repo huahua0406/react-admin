@@ -1,10 +1,10 @@
 import * as constants from '@/redux/constants/constants';
 
-const defaultStore = {
+const initialState = {
     userInfo: null
 };
 
-export default (state = defaultStore, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case constants.SET_USER_INFO:
             return Object.assign({}, state, {

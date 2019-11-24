@@ -1,5 +1,3 @@
-// 路由配置
-
 import loadable from '@/utils/loadable';
 
 // 参数一定要是函数，否则不会懒加载，只会代码拆分
@@ -31,15 +29,17 @@ const RichText = loadable(() => import(/* webpackChunkName: 'editor' */ '@/pages
 // about
 const About = loadable(() => import(/* webpackChunkName: 'about' */ '@/pages/About'));
 
-
-export const routes = [
+// 路由配置
+const routes = [
     {
         path: '/home',
-        component: Home
+        component: Home,
+        breadcrumb: '首页'
     },
     {
         path: '/ui/button',
-        component: ButtonDemo
+        component: ButtonDemo,
+        breadcrumb: '按钮'
     },
     {
         path: '/ui/icon',
@@ -94,3 +94,6 @@ export const routes = [
         component: About
     }
 ];
+
+
+export default routes
